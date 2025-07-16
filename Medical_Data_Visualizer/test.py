@@ -62,20 +62,26 @@ def draw_heat_map():
         (df['weight'] >= df['weight'].quantile(0.025)) &
         (df['weight'] <= df['weight'].quantile(0.975))
     ]
+    
+ 
 
     # 12
-    corr = None
+    corr = df_heat.corr()
 
     # 13
-    mask = None
+    mask = np.triu(np.ones_like(corr , dtype=bool))
+    
 
 
 
     # 14
-    fig, ax = None
+    fig, ax = plt.subplots(figsize=(12,10))
 
     # 15
-
+    sns.heatmap(
+        corr,
+        mask=mask,
+    )
 
 
     # 16
@@ -84,3 +90,4 @@ def draw_heat_map():
 
 
 draw_cat_plot()
+draw_heat_map()

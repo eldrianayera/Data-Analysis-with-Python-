@@ -25,12 +25,7 @@ def draw_cat_plot():
     # 7
 
 
-
     # 8
-    fig = None
-
-
-    # 9
     fig.savefig('catplot.png')
     return fig
 
