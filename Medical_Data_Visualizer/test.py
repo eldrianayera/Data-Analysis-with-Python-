@@ -1,7 +1,7 @@
 import pandas as pd
-# import seaborn as sns
-# import matplotlib.pyplot as plt
-# import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
 
 # 1
 df = pd.read_csv('medical_examination.csv')
@@ -16,7 +16,6 @@ df['overweight'] =  (df['weight'] / ((df['height']/100) ** 2) > 25).astype(int)
 df['cholesterol'] = (df['cholesterol'] > 1).astype(int) 
 df['gluc'] = (df['gluc'] > 1).astype(int) 
 
-print(df)
 
 
 # 4
@@ -25,15 +24,24 @@ def draw_cat_plot():
     df_cat = pd.melt(
         df,
         id_vars = ['cardio'],
-        value_vars = ['cholestrol' , 'gluc' , 'smoke']
+        value_vars = ['cholesterol' , 'gluc' , 'smoke']
     )
 
+    print(f"ssss\n{df_cat}")
     # 6
-    df_cat = None
+    df_cat = df_cat.groupby(['cardio', 'variable', 'value']).size().reset_index(name='total')
+    print(f"ffff\n{df_cat}")
+    
     
 
     # 7
-
+    fig = sns.catplot(
+        data = df_cat,
+        x = 'variable',
+        y = 'total' 
+        
+        
+    )
 
 
     # 8
@@ -68,3 +76,6 @@ def draw_heat_map():
     # 16
     fig.savefig('heatmap.png')
     return fig
+
+
+draw_cat_plot()
