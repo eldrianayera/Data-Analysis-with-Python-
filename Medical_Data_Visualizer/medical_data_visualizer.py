@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # 1
-df = None
+df = np.read_csv('')
 
 # 2
 df['overweight'] = None
