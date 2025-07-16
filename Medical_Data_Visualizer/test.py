@@ -24,7 +24,7 @@ def draw_cat_plot():
     df_cat = pd.melt(
         df,
         id_vars = ['cardio'],
-        value_vars = ['cholesterol' , 'gluc' , 'smoke']
+        value_vars = ['cholesterol','gluc','smoke','active','alco','overweight']
     )
 
     print(f"ssss\n{df_cat}")
@@ -35,14 +35,19 @@ def draw_cat_plot():
     
 
     # 7
-    fig = sns.catplot(
-        data=df_cat,
-        x='variable',
-        y='total',
-        hue='value',
-        col='cardio',
-        kind='bar'
-    ).fig
+    fig = sns.catplot (
+        data = df_cat ,
+        x = 'variable',
+        col = 'cardio',
+        hue = 'value' ,
+        kind = 'count'
+
+    ).set(ylabel = 'total').fig
+
+
+    # 9
+    fig.savefig('catplot.png')
+    return fig
     
     print(f"ssssss{type(fig)}")
     
@@ -69,13 +74,13 @@ def draw_heat_map():
     corr = df_heat.corr()
 
     # 13
-    mask = np.triu(np.ones_like(corr , dtype=bool))
+    mask = np.triu(corr)
     
 
 
 
     # 14
-    fig, ax = plt.subplots(figsize=(12,10))
+    fig, ax = plt.subplots()
 
     # 15
     sns.heatmap(
