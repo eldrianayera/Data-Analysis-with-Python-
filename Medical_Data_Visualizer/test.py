@@ -36,18 +36,16 @@ def draw_cat_plot():
 
     # 7
     fig = sns.catplot(
-        data = df_cat,
-        x = 'variable',
-        y = 'total' 
-        
-        
-    )
-
-
-    # 8
-    fig = None
-
-
+        data=df_cat,
+        x='variable',
+        y='total',
+        hue='value',
+        col='cardio',
+        kind='bar'
+    ).fig
+    
+    print(f"ssssss{type(fig)}")
+    
     # 9
     fig.savefig('catplot.png')
     return fig
@@ -56,7 +54,14 @@ def draw_cat_plot():
 # 10
 def draw_heat_map():
     # 11
-    df_heat = None
+  
+    df_heat = df[
+        (df['ap_lo'] <= df['ap_hi']) &
+        (df['height'] >= df['height'].quantile(0.025)) &
+        (df['height'] <= df['height'].quantile(0.975)) &
+        (df['weight'] >= df['weight'].quantile(0.025)) &
+        (df['weight'] <= df['weight'].quantile(0.975))
+    ]
 
     # 12
     corr = None
